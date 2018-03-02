@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
 
 
 router.get('/getimage', (req, res, next) => {
-  console.log(config["phantomjs-path"]);
+  console.log(`phantomjs path ${config["phantomjs-path"]}`);
   const url = decodeURIComponent(req.query.url);
   console.log(url);
   const rastrizeLibPath = path.join(__dirname, '../lib/rasterize.js')
