@@ -3,6 +3,7 @@ var router = express.Router();
 const uuid = require('uuid');
 const path = require('path');
 const exec = require('child_process').exec;
+const config = require('../config/config')
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -11,12 +12,17 @@ router.get('/', (req, res, next) => {
 
 
 router.get('/getimage', (req, res, next) => {
+  console.log(config["phantomjs-path"]);
   const url = decodeURIComponent(req.query.url);
   console.log(url);
   const rastrizeLibPath = path.join(__dirname, '../lib/rasterize.js')
   const fileName = `${uuid.v4()}.png`;
   const outputFile = path.join(__dirname, `../public/output/${fileName}`)
-  const cmd = `phantomjs ${rastrizeLibPath} ${url} ${outputFile} "1920px"`;
+  let phantomjsPath = 'phantomjs'
+  if(config["phantomjs-path"] != ''){
+    phantomjsPath = config["phantomjs-path"];
+  }
+  const cmd = `${phantomjsPath} ${rastrizeLibPath} ${url} ${outputFile} "1920px"`;
   console.log(cmd)
   exec(cmd, (err, stdout, stderr) => {
     if(err){
