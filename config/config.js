@@ -1,3 +1,4 @@
 module.exports = {
-	'phantomjs-path': ''
+	'phantomjs-path': '',
+	'wait-time': 5000
 }
