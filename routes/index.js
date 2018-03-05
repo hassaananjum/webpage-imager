@@ -32,10 +32,11 @@ router.get('/getimage', (req, res, next) => {
     else{
       // res.send(`/output/${fileName}`);
       console.log('sending redirect');
-      res.writeHead(302, {
-        'Location' : `/output/${fileName}`
-      })
-      res.end();
+      res.status(200).json({imageURL:`/output/${fileName}`})
+      // res.writeHead(302, {
+      //   'Location' : `/output/${fileName}`
+      // })
+      // res.end();
     }
   })
   // (async function() {
